@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ask C Language Doubts</title>
+</head>
+<body>
+  <h1>Ask Your C Programming Question</h1>
+  <textarea id="question"></textarea><br>
+  <button onclick="ask()">Ask</button>
+  <pre id="answer">Answer will appear here...</pre>
+
+  <script>
+    async function ask() {
+      const q = document.getElementById("question").value;
+      const res = await fetch("https://your-backend-url.onrender.com/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q })
+      });
+      const data = await res.json();
+      document.getElementById("answer").innerText = data.answer;
+    }
+  </script>
+</body>
+</html>
